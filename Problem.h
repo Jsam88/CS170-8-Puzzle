@@ -21,11 +21,31 @@ class Problem {
         }
 
         int uniform_cost_search(int & nodesExpanded, int & queueMax){
-            Node* curr = initial_puzzle_state;
-            nodesExpanded++;
-            queueMax++;
-            curr -> Print();
-            return -1;
+            priority_queue<Node*, vector<Node*>, Compare_node_cost> Q;      //Refer to Prioirty Queue explanation in Priority.h
+            Q.push(initial_puzzle_state);
+ 
+                while(!Q.empty) {     //Compare the frontier size. If its queue is larger then the current max, update it
+                    if(Q.size() > queueMax){
+                        queueMax = Q.size();
+                    }
+
+                    Node* enqueued_node = Q.top();      //point to the top of the queue
+                    Q.pop();
+
+                    //Now we want to check if the node is at the goal (Check before we make any node moves)
+                    //Now we want to check if the queued node (top)/current node if it has any children going left, right, up, or down
+                    //If it does, then we want check if it was visited already so that we do not have to visit it again.
+                    //While loop takes care of going through the nodes until it finishes the enqueued nodes completely.
+                }
+
+
+
+ 
+            // Node* curr = initial_puzzle_state;
+            // nodesExpanded++;
+            // queueMax++;
+            // curr -> Print();
+            // return -1;
         }
 
 
