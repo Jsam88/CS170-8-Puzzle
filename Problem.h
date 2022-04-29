@@ -20,6 +20,14 @@ class Problem {
                 this->goal_state = goal_state;
         }
 
+        int uniform_cost_search(int & nodesExpanded, int & queueMax){
+            Node* curr = initial_puzzle_state;
+            nodesExpanded++;
+            queueMax++;
+            curr -> Print();
+            return -1;
+        }
+
 
 //Helper functions to move the * (Empty tile)
 //We want to use these helper functions to do something to the current node and then we want to check the visited nodes.
@@ -29,12 +37,14 @@ class Problem {
 As stated in the project "Each node object has a pointer to its parent node. We use the pointers to 
 parent nodes in order to create the final solution*/
 
+
+
 //TO DO: Initialize a function in node that switches the positions 
         Node* left(Node* curr_position) {
             if (curr_position -> empty_column == 0) {       //WE cant move any further left
                 return nullptr;
             }
-            Node* new_position = new Node(curr_position->matrix, curr_position -> cost + 1, curr_position); //New position takes the current position in the matrix, updates the cost, then updates the current position
+            Node* new_position = new Node(curr_position->matrix, curr_position -> move_cost + 1, curr_position); //New position takes the current position in the matrix, updates the cost, then updates the current position
             
             new_position -> move_node(curr_position -> empty_row, curr_position -> empty_column, curr_position -> empty_row, curr_position -> empty_column - 1);
             new_position -> empty_column -= 1;          //SUBTRACT 1 here to move left in the vector of vectors
@@ -46,7 +56,7 @@ parent nodes in order to create the final solution*/
             if (curr_position -> empty_column == 2) {
                 return nullptr;
             }
-            Node* new_position = new Node(curr_position->matrix, curr_position -> cost + 1, curr_position);
+            Node* new_position = new Node(curr_position->matrix, curr_position -> move_cost + 1, curr_position);
             
             new_position -> move_node(curr_position -> empty_row, curr_position -> empty_column, curr_position -> empty_row, curr_position -> empty_column + 1);
             new_position -> empty_column += 1;
@@ -58,7 +68,7 @@ parent nodes in order to create the final solution*/
             if (curr_position -> empty_row == 0) {
                 return nullptr;
             }
-            Node* new_position = new Node(curr_position->matrix, curr_position -> cost + 1, curr_position);
+            Node* new_position = new Node(curr_position->matrix, curr_position -> move_cost + 1, curr_position);
             
             new_position -> move_node(curr_position -> empty_row, curr_position -> empty_column, curr_position -> empty_row - 1, curr_position -> empty_column);
             new_position -> empty_row -= 1;
@@ -70,7 +80,7 @@ parent nodes in order to create the final solution*/
             if (curr_position -> empty_row == 2) {
                 return nullptr;
             }
-            Node* new_position = new Node(curr_position->matrix, curr_position -> cost + 1, curr_position);
+            Node* new_position = new Node(curr_position->matrix, curr_position -> move_cost + 1, curr_position);
             
             new_position -> move_node(curr_position -> empty_row, curr_position -> empty_column, curr_position -> empty_row + 1, curr_position -> empty_column);
             new_position -> empty_row += 1;
@@ -88,11 +98,11 @@ parent nodes in order to create the final solution*/
                         }
                     }
                 }
-        
-        //We want to utilize this so that if its visited already in the search.
         //Use this in search. If visited already just pop it immediately off the queue and do not visit the nodes children
+            }
+        return false;
+        }
 };
-
 
 #endif
 
