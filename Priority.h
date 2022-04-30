@@ -11,7 +11,7 @@ struct Compare_node_cost {
     {
         // return "true" if "p1" is ordered
         // before "p2", for example:
-        return p1 -> move_cost < p2 -> move_cost;
+        return p1 -> move_cost > p2 -> move_cost;
     }
 };
 
