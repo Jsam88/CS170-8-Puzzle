@@ -44,10 +44,9 @@ class Node{
     void move_node(int first_row, int first_column, int new_row, int new_column) {
         int temp = this -> matrix.at(new_row).at(new_column);
         matrix.at(new_row).at(new_column) = matrix.at(first_row).at(first_column);
-        matrix.at(first_column).at(first_column) = temp;
+        matrix.at(first_row).at(first_column) = temp;
     }
 
-    //Print board using double for loops.
     //RESOURCES USED: modified the implementation of http://www.cplusplus.com/forum/beginner/9126/ (How to print a 3 by 3 matrix)
     void Print() {
         for (int i = 0; i < matrix.size(); i++) {
