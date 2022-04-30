@@ -26,6 +26,8 @@ int main() {
         cin >> userInput;
     }
 
+    cout << endl;
+
     //The default puzzle is set. We only switch to the userPuzzles if the input is 2 and if they finish putting in valid inputs.
     //If it is, then we set it to true and call the algorithm on the custom vector of vectors.
     //we have to grabs 9 numbers from the user(3 sets of 3 user inputs) to make a 3 by 3 matrix
@@ -77,7 +79,7 @@ int main() {
 
     
 
-    cout << "Enter your choice of algorithm." << endl << "(1) Uniform Cost Search" << endl << "(2) Misplaced Tile Heuristic" << endl << "(3) the Eucledian Distance Heuristic.\n";
+    cout << "Enter your choice of algorithm." << endl << "(1) Uniform Cost Search" << endl << "(2) Misplaced Tile Heuristic" << endl << "(3) the Eucledian Distance Heuristic." << endl;
 
     cin.clear(); //Ensure that the user input is new
     userInput = 0;
@@ -87,6 +89,8 @@ int main() {
         cout << "Invalid input. Try again." << endl;
         cin >> userInput;
     }
+
+    cout << endl;
 
     Node* goal_state = new Node(puzzle_goal, 0, nullptr);
     
