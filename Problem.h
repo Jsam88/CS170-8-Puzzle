@@ -48,11 +48,14 @@ class Problem {
                     if(!node_visited_already(enqueued_node, visited_nodes)) {
                             visited_nodes.push_back(enqueued_node);
                             cout << "New node!" << endl;
-                            
-                            Q.push(left(enqueued_node));
-                    
-                    }
 
+                        if (left(enqueued_node) != nullptr) {
+                            if (!node_visited_already(left(enqueued_node), visited_nodes)){
+                                Q.push(left(enqueued_node));
+                            }
+                        }
+
+                    }
                 }
             return -1;
         }
