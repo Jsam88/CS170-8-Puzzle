@@ -62,6 +62,18 @@ class Node{
         }
         cout << endl;
     }
+
+    bool check_goal(Node* compareNode, Node* goal) { //checks if a node is the goal state
+            for (int i = 0; i < 3; i++) {
+                for (int j = 0; j < 3; j++) {
+                    if (compareNode -> matrix.at(i).at(j) != goal -> matrix.at(i).at(j)) {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
 };
 
 class Heuristic {
