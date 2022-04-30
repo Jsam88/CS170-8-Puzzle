@@ -43,7 +43,14 @@ class Problem {
                     //If it does, then we want check if it was visited already so that we do not have to visit it again.
                     //While loop takes care of going through the nodes until it finishes the enqueued nodes completely.
             
- 
+                
+                if(enqueued_node->checkGoal(enqueued_node, goal_state)) { //check if top node visited or goal
+                    // printSolution(curr);
+                    cout << "GOAL!!!" << endl;
+                    return enqueued_node -> move_cost;
+                }
+
+
                     nodesExpanded++;        //Increment the nodes expanded
                     if(!node_visited_already(enqueued_node, visited_nodes)) {
                             visited_nodes.push_back(enqueued_node);
@@ -52,6 +59,24 @@ class Problem {
                         if (left(enqueued_node) != nullptr) {
                             if (!node_visited_already(left(enqueued_node), visited_nodes)){
                                 Q.push(left(enqueued_node));
+                            }
+                        }
+
+                        if (right(enqueued_node) != nullptr) {
+                            if (!node_visited_already(right(enqueued_node), visited_nodes)){
+                                Q.push(right(enqueued_node));
+                            }
+                        }
+
+                        if (up(enqueued_node) != nullptr) {
+                            if (!node_visited_already(up(enqueued_node), visited_nodes)){
+                                Q.push(up(enqueued_node));
+                            }
+                        }
+
+                        if (down(enqueued_node) != nullptr) {
+                            if (!node_visited_already(down(enqueued_node), visited_nodes)){
+                                Q.push(down(enqueued_node));
                             }
                         }
 
@@ -69,9 +94,6 @@ class Problem {
 As stated in the project "Each node object has a pointer to its parent node. We use the pointers to 
 parent nodes in order to create the final solution*/
 
-
-
-//TO DO: Initialize a function in node that switches the positions 
         Node* left(Node* curr_position) {
             if (curr_position -> empty_column == 0) {       //WE cant move any further left
                 return nullptr;
