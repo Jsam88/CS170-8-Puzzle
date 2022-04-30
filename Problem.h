@@ -29,7 +29,7 @@ class Problem {
 
             Q.push(initial_puzzle_state);
  
-                while(!Q.empty()) {     //Compare the frontier size. If its queue is larger then the current max, update it
+                while(!Q.empty()) {                     //Compare the frontier size. If its queue is larger then the current max, update it
                     if(Q.size() > queueMax){
                         queueMax = Q.size();
                     }
@@ -44,14 +44,14 @@ class Problem {
                     //While loop takes care of going through the nodes until it finishes the enqueued nodes completely.
             
                 
-                if(enqueued_node->checkGoal(enqueued_node, goal_state)) { //check if top node visited or goal
-                    // printSolution(curr);
+                if(enqueued_node->check_goal(enqueued_node, goal_state)) { //check if top node visited or goal
                     cout << "GOAL!!!" << endl;
                     return enqueued_node -> move_cost;
                 }
 
 
                     nodesExpanded++;        //Increment the nodes expanded
+                    
                     if(!node_visited_already(enqueued_node, visited_nodes)) {
                             visited_nodes.push_back(enqueued_node);
                             cout << "New node!" << endl;
@@ -79,7 +79,6 @@ class Problem {
                                 Q.push(down(enqueued_node));
                             }
                         }
-
                     }
                 }
             return -1;
@@ -153,8 +152,12 @@ parent nodes in order to create the final solution*/
                         }
                     }
                 }
+            if(visited){
+                return true;
             }
-        return false;
+            
+            }
+            return false;
         }
 };
 
