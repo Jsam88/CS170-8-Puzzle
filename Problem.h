@@ -6,6 +6,7 @@
 #include <cmath>
 #include <utility>
 #include "Node.h"
+#include "Priority.h"
 
 using namespace std;
 //give it to the search algorithm as the input parameter. 
@@ -22,30 +23,38 @@ class Problem {
 
         int uniform_cost_search(int & nodesExpanded, int & queueMax){
             priority_queue<Node*, vector<Node*>, Compare_node_cost> Q;      //Refer to Prioirty Queue explanation in Priority.h
+
+            vector<Node*> visited_nodes;                                    //Creating vector to create track of the nodes expanded
+                                                                            //node_visited_already will check if the node has been visited already
+
             Q.push(initial_puzzle_state);
  
-                while(!Q.empty) {     //Compare the frontier size. If its queue is larger then the current max, update it
+                while(!Q.empty()) {     //Compare the frontier size. If its queue is larger then the current max, update it
                     if(Q.size() > queueMax){
                         queueMax = Q.size();
                     }
 
                     Node* enqueued_node = Q.top();      //point to the top of the queue
-                    Q.pop();
+                    Q.pop();                            //Remove the top of the queue
 
+                    enqueued_node -> Print();
                     //Now we want to check if the node is at the goal (Check before we make any node moves)
                     //Now we want to check if the queued node (top)/current node if it has any children going left, right, up, or down
                     //If it does, then we want check if it was visited already so that we do not have to visit it again.
                     //While loop takes care of going through the nodes until it finishes the enqueued nodes completely.
-                }
-
-
-
+            
  
-            // Node* curr = initial_puzzle_state;
-            // nodesExpanded++;
-            // queueMax++;
-            // curr -> Print();
-            // return -1;
+                    nodesExpanded++;        //Increment the nodes expanded
+                    if(!node_visited_already(enqueued_node, visited_nodes)) {
+                            visited_nodes.push_back(enqueued_node);
+                            cout << "New node!" << endl;
+                            
+                            Q.push(left(enqueued_node));
+                    
+                    }
+
+                }
+            return -1;
         }
 
 
@@ -108,6 +117,7 @@ parent nodes in order to create the final solution*/
             return new_position;
         }
 
+        //Use this in search. If visited already just pop it immediately off the queue and do not visit the nodes children
         bool node_visited_already(Node* node_to_check, vector<Node*> visited_node){ //Do a check if the node (children) is visited already. (Utilized Resource 2)
             for (int i = 0; i < visited_node.size(); i++){
                 bool visited = true;
@@ -118,7 +128,6 @@ parent nodes in order to create the final solution*/
                         }
                     }
                 }
-        //Use this in search. If visited already just pop it immediately off the queue and do not visit the nodes children
             }
         return false;
         }
