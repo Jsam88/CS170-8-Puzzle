@@ -115,6 +115,21 @@ class euclidean_heuristic : public Heuristic {
     double leg_b;
     double hypotenuse;
     //Iterate through the matrix. Given the node at i,j, find the distance from row to row and column to column
+
+    for (int i = 0; i < 3; i++) {
+                for (int j = 0; j < 3; j++) {
+                    
+                    if (current_position -> matrix.at(i).at(j) != goal_position -> matrix.at(i).at(j)) {        //DO A CHECK TO MAKE SURE WE ARENT AT GOAL
+                        if (current_position -> matrix.at(i).at(j) != 0) {
+                            //CALCULATE LEGS
+                            hypotenuse = sqrt(pow(leg_a, 2) + pow(leg_b, 2));
+                            distance = distance + hypotenuse;
+                        }
+                    }
+                }
+            }
+            return distance;
+    }
 };
 
 #endif
