@@ -44,13 +44,13 @@ class Problem {
                     //If it does, then we want check if it was visited already so that we do not have to visit it again.
                     //While loop takes care of going through the nodes until it finishes the enqueued nodes completely.
                 
-                nodesExpanded++;        //Increment the nodes expanded
                 
                 if(enqueued_node->check_goal(enqueued_node, goal_state)) { //check if top node visited or goal
                     depth = enqueued_node -> depth;
                     return enqueued_node -> move_cost;
                 }
 
+                    nodesExpanded++;        //Increment the nodes expanded
                     
                     if(!node_visited_already(enqueued_node, visited_nodes)) {
                             visited_nodes.push_back(enqueued_node);
@@ -102,12 +102,12 @@ class Problem {
 
                     enqueued_node -> Print();
                 
-                nodesExpanded++;        //Increment the nodes expanded
-                
                 if(enqueued_node->check_goal(enqueued_node, goal_state)) { //check if top node visited or goal
                     depth = enqueued_node -> depth;
                     return enqueued_node -> move_cost;
                 }
+                                    
+                    nodesExpanded++;        //Increment the nodes expanded
 
                     
                     if(!node_visited_already(enqueued_node, visited_nodes)) {
@@ -160,13 +160,13 @@ class Problem {
 
                     enqueued_node -> Print();
                 
-                nodesExpanded++;        //Increment the nodes expanded
                 
                 if(enqueued_node->check_goal(enqueued_node, goal_state)) { //check if top node visited or goal
                     depth = enqueued_node -> depth;
                     return enqueued_node -> move_cost;
                 }
 
+                    nodesExpanded++;        //Increment the nodes expanded
                     
                     if(!node_visited_already(enqueued_node, visited_nodes)) {
                             visited_nodes.push_back(enqueued_node);
