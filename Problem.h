@@ -47,6 +47,9 @@ class Problem {
                 
                 if(enqueued_node->check_goal(enqueued_node, goal_state)) { //check if top node visited or goal
                     depth = enqueued_node -> depth;
+
+                    solution(enqueued_node);
+                    
                     return enqueued_node -> move_cost;
                 }
 
@@ -104,6 +107,9 @@ class Problem {
                 
                 if(enqueued_node->check_goal(enqueued_node, goal_state)) { //check if top node visited or goal
                     depth = enqueued_node -> depth;
+
+                    solution(enqueued_node);
+
                     return enqueued_node -> move_cost;
                 }
                                     
@@ -163,6 +169,9 @@ class Problem {
                 
                 if(enqueued_node->check_goal(enqueued_node, goal_state)) { //check if top node visited or goal
                     depth = enqueued_node -> depth;
+
+                    solution(enqueued_node);
+
                     return enqueued_node -> move_cost;
                 }
 
@@ -274,6 +283,16 @@ parent nodes in order to create the final solution*/
             }
             return false;
         }
+        void solution(Node* enqued_node){
+        if (enqued_node -> parentNode == nullptr){
+            cout << "Recursively called nodes parent to print solution" << endl << endl;
+        }
+        else {
+            solution(enqued_node -> parentNode);    //Get childs parent. That parents parent until initial puzzle node passed in then print it
+        }
+        enqued_node -> Print();
+
+    }
 };
 
 #endif
