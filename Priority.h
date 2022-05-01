@@ -26,6 +26,20 @@ struct misplaced_tile_cost {                       //Helper Class for the Priori
         Node* final_goal_state = new Node(puzzle_goal, 0, nullptr, 0);
 
         Heuristic* heuristic_object = new misplaced_tile_heuristic();        //instantiate new misplaced tile heuristic distance check implemented inside node
+        
+        return (p1 -> move_cost) + heuristic_object->heuristic_compare(p1, final_goal_state) > p2->move_cost + heuristic_object->heuristic_compare(p2, final_goal_state);
+    }   //Gets the first nodes current move costs, adds it to the # of misplaced tiles, then sorts it in cheapest move cost order
+};
+
+struct euclidean_cost {                           //Helper Class for the Priority Queue Functions
+virtual bool operator() (Node* p1, Node* p2) {
+
+        vector<vector<int>> puzzle_goal = {{1,2,3}, {4,5,6}, {7,8,0}};
+
+        Node* final_goal_state = new Node(puzzle_goal, 0, nullptr, 0);
+
+        Heuristic* heuristic = new euclidean_heuristic();        //instantiate new misplaced tile heuristic distance check implemented inside node
+        
         return (p1 -> move_cost) + heuristic_object->heuristic_compare(p1, final_goal_state) > p2->move_cost + heuristic_object->heuristic_compare(p2, final_goal_state);
     }   //Gets the first nodes current move costs, adds it to the # of misplaced tiles, then sorts it in cheapest move cost order
 };

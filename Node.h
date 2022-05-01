@@ -103,6 +103,13 @@ class misplaced_tile_heuristic : public Heuristic {
         }
 };
 
+class euclidean_heuristic : public Heuristic {
+    public:
+    euclidean_heuristic(){};       //constructor for data member of the current/goals position
+
+    virtual int euclidean_compare(Node* current_position, Node* goal_position){
+};
+
 #endif
 
 /*EX VISUALIZATION FOR HEURISTIC VALUE:
