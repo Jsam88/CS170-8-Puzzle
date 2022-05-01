@@ -103,16 +103,14 @@ int main() {
     if (userInput == 1){
         // depth = puzzle ->uniform_cost_search(nodesExpanded, queueMax, depth);
         puzzle -> uniform_cost_search(nodesExpanded, queueMax, depth);
-        // depth = test -> depth;
-        // queueMax = test ->
     }
 
     else if (userInput == 2){
-        cout << "Test" << endl;
+        puzzle -> misplaced_tile_heuristic(nodesExpanded, queueMax, depth);
     }
 
     else if (userInput == 3){
-        cout << "Test" << endl;
+        puzzle -> euclidean_heuristic(nodesExpanded, queueMax, depth);
     }
     
     cout << "To solve this problem the search expanded a total of  " << nodesExpanded << " nodes" << endl;
