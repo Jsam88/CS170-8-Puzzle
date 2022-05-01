@@ -82,7 +82,7 @@ class Node{
 class Heuristic {
     public:
         Heuristic(){}
-        virtual int heuristic(Node* current_position, Node* goal_position) = 0;     //VIRTUAL to ensure that the correct function is called on the object
+        virtual int heuristic_compare(Node* current_position, Node* goal_position) = 0;     //VIRTUAL to ensure that the correct function is called on the object
 };
 
 //Given a node, compare it to where it belongs.
@@ -90,9 +90,9 @@ class misplaced_tile_heuristic : public Heuristic {
     public:
         misplaced_tile_heuristic(){};       //constructor for data member of the current/goals position
 
-        virtual int heuristic(Node* current_position, Node* goal_position){
-            int distance = 0;
-            for (int i = 0; i < 3; i++) {               //double for loop allows for coordinates in matrix like (y,x)
+        virtual int heuristic_compare(Node* current_position, Node* goal_position){         //Given the nodes position, we determine how far it is from the
+            int distance = 0;                                                               //goal by iterating every position till it matches
+            for (int i = 0; i < 3; i++) {                                                   //double for loop allows for coordinates in matrix like (y,x)
                 for (int j = 0; j < 3; j++) {
                     if (current_position -> matrix.at(i).at(j) != goal_position -> matrix.at(i).at(j)) {
                         distance++;

@@ -22,7 +22,8 @@ class Problem {
         }
 
         int uniform_cost_search(int & nodesExpanded, int & queueMax, int & depth){
-            priority_queue<Node*, vector<Node*>, Compare_node_cost> Q;      //Refer to Prioirty Queue explanation in Priority.h
+            priority_queue<Node*, vector<Node*>, Compare_node_cost> Q;     //Refer to Prioirty Queue explanation in Priority.h
+
 
             vector<Node*> visited_nodes;                                    //Creating vector to create track of the nodes expanded
                                                                             //node_visited_already will check if the node has been visited already
@@ -82,8 +83,62 @@ class Problem {
             return -1;
         }
 
-        void misplaced_heuristic(int & nodesExpanded, int & queueMax, int & depth){
-            
+        //Repeat using different Queue to incorporate the weighted value of the misplaced tile!
+        int misplaced_tile_heuristic(int & nodesExpanded, int & queueMax, int & depth){
+            priority_queue<Node*, vector<Node*>, misplaced_tile_cost> Q;      //Refer to Prioirty Queue explanation in Priority.h
+
+            vector<Node*> visited_nodes;                                    //Creating vector to create track of the nodes expanded
+                                                                            //node_visited_already will check if the node has been visited already
+
+            Q.push(initial_puzzle_state);
+ 
+                while(!Q.empty()) {                     //Compare the frontier size. If its queue is larger then the current max, update it
+                    if(Q.size() > queueMax){
+                        queueMax = Q.size();
+                    }
+
+                    Node* enqueued_node = Q.top();      //point to the top of the queue
+                    Q.pop();                            //Remove the top of the queue
+
+                    enqueued_node -> Print();
+                
+                nodesExpanded++;        //Increment the nodes expanded
+                
+                if(enqueued_node->check_goal(enqueued_node, goal_state)) { //check if top node visited or goal
+                    depth = enqueued_node -> depth;
+                    return enqueued_node -> move_cost;
+                }
+
+                    
+                    if(!node_visited_already(enqueued_node, visited_nodes)) {
+                            visited_nodes.push_back(enqueued_node);
+
+                        if (left(enqueued_node) != nullptr) {
+                            if (!node_visited_already(left(enqueued_node), visited_nodes)){
+                                Q.push(left(enqueued_node));
+                            }
+                        }
+
+                        if (right(enqueued_node) != nullptr) {
+                            if (!node_visited_already(right(enqueued_node), visited_nodes)){
+                                Q.push(right(enqueued_node));
+                            }
+                        }
+
+                        if (up(enqueued_node) != nullptr) {
+                            if (!node_visited_already(up(enqueued_node), visited_nodes)){
+                                Q.push(up(enqueued_node));
+                            }
+                        }
+
+                        if (down(enqueued_node) != nullptr) {
+                            if (!node_visited_already(down(enqueued_node), visited_nodes)){
+                                Q.push(down(enqueued_node));
+                            }
+                        }
+                    }
+                }
+            return -1;
         }
 
 
