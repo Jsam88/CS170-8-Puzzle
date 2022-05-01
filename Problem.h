@@ -21,7 +21,7 @@ class Problem {
                 this->goal_state = goal_state;
         }
 
-        int uniform_cost_search(int & nodesExpanded, int & queueMax){
+        int uniform_cost_search(int & nodesExpanded, int & queueMax, int & depth){
             priority_queue<Node*, vector<Node*>, Compare_node_cost> Q;      //Refer to Prioirty Queue explanation in Priority.h
 
             vector<Node*> visited_nodes;                                    //Creating vector to create track of the nodes expanded
@@ -42,19 +42,17 @@ class Problem {
                     //Now we want to check if the queued node (top)/current node if it has any children going left, right, up, or down
                     //If it does, then we want check if it was visited already so that we do not have to visit it again.
                     //While loop takes care of going through the nodes until it finishes the enqueued nodes completely.
-            
+                
+                nodesExpanded++;        //Increment the nodes expanded
                 
                 if(enqueued_node->check_goal(enqueued_node, goal_state)) { //check if top node visited or goal
-                    cout << "GOAL!!!" << endl;
+                    depth = enqueued_node -> depth;
                     return enqueued_node -> move_cost;
                 }
 
-
-                    nodesExpanded++;        //Increment the nodes expanded
                     
                     if(!node_visited_already(enqueued_node, visited_nodes)) {
                             visited_nodes.push_back(enqueued_node);
-                            cout << "New node!" << endl;
 
                         if (left(enqueued_node) != nullptr) {
                             if (!node_visited_already(left(enqueued_node), visited_nodes)){
@@ -84,6 +82,10 @@ class Problem {
             return -1;
         }
 
+        void misplaced_heuristic(int & nodesExpanded, int & queueMax, int & depth){
+            
+        }
+
 
 //Helper functions to move the * (Empty tile)
 //We want to use these helper functions to do something to the current node and then we want to check the visited nodes.
@@ -97,7 +99,7 @@ parent nodes in order to create the final solution*/
             if (curr_position -> empty_column == 0) {       //WE cant move any further left
                 return nullptr;
             }
-            Node* new_position = new Node(curr_position->matrix, curr_position -> move_cost + 1, curr_position); //New position takes the current position in the matrix, updates the cost, then updates the current position
+            Node* new_position = new Node(curr_position->matrix, curr_position -> move_cost + 1, curr_position, curr_position -> depth + 1); //New position takes the current position in the matrix, updates the cost, then updates the current position
             
             new_position -> move_node(curr_position -> empty_row, curr_position -> empty_column, curr_position -> empty_row, curr_position -> empty_column - 1);
             new_position -> empty_column -= 1;          //SUBTRACT 1 here to move left in the vector of vectors
@@ -109,7 +111,7 @@ parent nodes in order to create the final solution*/
             if (curr_position -> empty_column == 2) {
                 return nullptr;
             }
-            Node* new_position = new Node(curr_position->matrix, curr_position -> move_cost + 1, curr_position);
+            Node* new_position = new Node(curr_position->matrix, curr_position -> move_cost + 1, curr_position, curr_position -> depth + 1);
             
             new_position -> move_node(curr_position -> empty_row, curr_position -> empty_column, curr_position -> empty_row, curr_position -> empty_column + 1);
             new_position -> empty_column += 1;
@@ -121,7 +123,7 @@ parent nodes in order to create the final solution*/
             if (curr_position -> empty_row == 0) {
                 return nullptr;
             }
-            Node* new_position = new Node(curr_position->matrix, curr_position -> move_cost + 1, curr_position);
+            Node* new_position = new Node(curr_position->matrix, curr_position -> move_cost + 1, curr_position, curr_position -> depth + 1);
             
             new_position -> move_node(curr_position -> empty_row, curr_position -> empty_column, curr_position -> empty_row - 1, curr_position -> empty_column);
             new_position -> empty_row -= 1;
@@ -133,7 +135,7 @@ parent nodes in order to create the final solution*/
             if (curr_position -> empty_row == 2) {
                 return nullptr;
             }
-            Node* new_position = new Node(curr_position->matrix, curr_position -> move_cost + 1, curr_position);
+            Node* new_position = new Node(curr_position->matrix, curr_position -> move_cost + 1, curr_position, curr_position -> depth + 1);
             
             new_position -> move_node(curr_position -> empty_row, curr_position -> empty_column, curr_position -> empty_row + 1, curr_position -> empty_column);
             new_position -> empty_row += 1;
