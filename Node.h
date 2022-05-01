@@ -121,7 +121,9 @@ class euclidean_heuristic : public Heuristic {
                     
                     if (current_position -> matrix.at(i).at(j) != goal_position -> matrix.at(i).at(j)) {        //DO A CHECK TO MAKE SURE WE ARENT AT GOAL
                         if (current_position -> matrix.at(i).at(j) != 0) {
-                            //CALCULATE LEGS
+                            
+                            leg_a = abs(current_position -> matrix.at(i-i).at(j) - goal_position -> matrix.at(i-i).at(j));  //Calculate 1st leg
+                            leg_b = abs(current_position -> matrix.at(i).at(j-j) - goal_position -> matrix.at(i).at(j-j));  //Calculate 2nd leg
                             hypotenuse = sqrt(pow(leg_a, 2) + pow(leg_b, 2));
                             distance = distance + hypotenuse;
                         }
