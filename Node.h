@@ -2,6 +2,7 @@
 #define NODE_H
 
 #include <cmath>
+#include <cstdlib>
 #include <string>
 #include <vector>
 #include <iostream>
@@ -107,7 +108,13 @@ class euclidean_heuristic : public Heuristic {
     public:
     euclidean_heuristic(){};       //constructor for data member of the current/goals position
 
-    virtual int euclidean_compare(Node* current_position, Node* goal_position){
+    virtual int heuristic_compare(Node* current_position, Node* goal_position){
+
+    int distance = 0;
+    double leg_a;
+    double leg_b;
+    double hypotenuse;
+    //Iterate through the matrix. Given the node at i,j, find the distance from row to row and column to column
 };
 
 #endif
