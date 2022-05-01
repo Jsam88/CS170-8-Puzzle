@@ -16,7 +16,9 @@ class Node{
                                   //                                    |4 5 6 |
     int empty_row = 0;            //Row of the empty spot with a *      |7 8 * |
 
-    int move_cost = 0; //cost of node and path to get to goal state 
+    int move_cost = 0; //cost of node and path to get to goal state
+
+    int depth = 0; 
 
     //We use the pointers to parent nodes in order to create the final solution (by following the parents of the goal 
     //node all the way up to the root of the tree).
@@ -25,9 +27,10 @@ class Node{
 
     // Node() will have three parameters. The matrix values, cost to move, and the parent node to decide the next move
     
-    Node(vector <vector<int> > Matrix, int move_cost, Node* parentNode) {
+    Node(vector <vector<int> > Matrix, int move_cost, Node* parentNode, int depth) {
         this->matrix = Matrix;
         this->move_cost = move_cost;
+        this->depth = depth;
         for (int i = 0; i < Matrix.size(); i++) {
             for (int j = 0; j < Matrix.at(i).size(); j++) {
                 if(Matrix.at(i).at(j) == 0) {
@@ -111,7 +114,7 @@ Current puzzle:
 Goal state:
         |1 2 3|
         |4 5 6|
-        |7 8 *|
+        |8 7 *|
 
 heuristic(Node pointing to start, Node* pointing to goal)
 distance from goal should return 1 since only the 8 is misplaced.
