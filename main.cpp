@@ -69,11 +69,11 @@ int main() {
         custom_state.push_back(firstRow);
         custom_state.push_back(secondRow);
         custom_state.push_back(thirdRow);
-        initial_puzzle_state = new Node(custom_state, 0, nullptr);
+        initial_puzzle_state = new Node(custom_state, 0, nullptr, 0);
     }
 
     else if(userInput == 1){
-        initial_puzzle_state = new Node(puzzle_one, 0, nullptr);
+        initial_puzzle_state = new Node(puzzle_one, 0, nullptr, 0);
     }
 
 
@@ -92,7 +92,7 @@ int main() {
 
     cout << endl;
 
-    Node* goal_state = new Node(puzzle_goal, 0, nullptr);
+    Node* goal_state = new Node(puzzle_goal, 0, nullptr, 0);
     
     Problem* puzzle = new Problem(initial_puzzle_state, goal_state);         //Problem object that takes in values of the starting state and the goal state
 
@@ -101,7 +101,10 @@ int main() {
     int depth = 0; 
 
     if (userInput == 1){
-        puzzle -> uniform_cost_search(nodesExpanded, queueMax);
+        // depth = puzzle ->uniform_cost_search(nodesExpanded, queueMax, depth);
+        puzzle -> uniform_cost_search(nodesExpanded, queueMax, depth);
+        // depth = test -> depth;
+        // queueMax = test ->
     }
 
     else if (userInput == 2){
