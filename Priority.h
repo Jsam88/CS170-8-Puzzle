@@ -38,7 +38,7 @@ virtual bool operator() (Node* p1, Node* p2) {
 
         Node* final_goal_state = new Node(puzzle_goal, 0, nullptr, 0);
 
-        Heuristic* heuristic = new euclidean_heuristic();        //instantiate new misplaced tile heuristic distance check implemented inside node
+        Heuristic* heuristic_object = new euclidean_heuristic();        //instantiate new misplaced tile heuristic distance check implemented inside node
         
         return (p1 -> move_cost) + heuristic_object->heuristic_compare(p1, final_goal_state) > p2->move_cost + heuristic_object->heuristic_compare(p2, final_goal_state);
     }   //Gets the first nodes current move costs, adds it to the # of misplaced tiles, then sorts it in cheapest move cost order
