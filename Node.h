@@ -26,7 +26,7 @@ class Node{
     
     Node* parentNode; //used for printing solution path
 
-    // Node() will have three parameters. The matrix values, cost to move, and the parent node to decide the next move
+    // Node() will have four parameters. The matrix values, cost to move, the parent node to hold its postion, and the depth of the tree
     
     Node(vector <vector<int> > Matrix, int move_cost, Node* parentNode, int depth) {
         this->matrix = Matrix;
