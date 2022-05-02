@@ -79,7 +79,7 @@ int main() {
 
     
 
-    cout << "Enter your choice of algorithm." << endl << "(1) Uniform Cost Search" << endl << "(2) Misplaced Tile Heuristic" << endl << "(3) the Eucledian Distance Heuristic." << endl;
+    cout << "Enter your choice of algorithm." << endl << "(1) Uniform Cost Search" << endl << "(2) Misplaced Tile Heuristic" << endl << "(3) the Euclidian Distance Heuristic." << endl;
 
     cin.clear(); //Ensure that the user input is new
     userInput = 0;
